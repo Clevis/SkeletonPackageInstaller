@@ -190,7 +190,7 @@ class PackageInstaller extends LibraryInstaller
 	 */
 	private function copyFiles($sourceDir, $mapping, $onceOnly = FALSE)
 	{
-		//echo "\nCOPY: " . substr($sourceDir, 40) . ":\n";
+		echo "\nCOPY: " . substr($sourceDir, 40) . ":\n";
 		$files = new DirectoryIterator($sourceDir);
 		/** @var DirectoryIterator $file */
 		foreach ($files as $file)
@@ -209,11 +209,11 @@ class PackageInstaller extends LibraryInstaller
 				$targetPath = $this->getMappedPath($file->getPathname(), $mapping);
 				if (!$targetPath || $onceOnly && file_exists($targetPath))
 				{
-					//echo "- skip: " . substr($file->getPathname(), 40) . "\n";
+					echo "- skip: " . substr($file->getPathname(), 40) . "\n";
 					continue;
 				}
 				$this->filesystem->ensureDirectoryExists(dirname($targetPath));
-				//echo "- copy: " . substr($file->getPathname(), 40) . ' --> ' . substr($targetPath, 40) . "\n";
+				echo "- copy: " . substr($file->getPathname(), 40) . ' --> ' . substr($targetPath, 40) . "\n";
 				copy($file->getPathname(), $targetPath);
 				if (!$onceOnly)
 				{
@@ -232,7 +232,7 @@ class PackageInstaller extends LibraryInstaller
 	 */
 	private function deleteFiles($sourceDir, $mapping)
 	{
-		//echo "\nDELETE: " . substr($sourceDir, 40) . ":\n";
+		echo "\nDELETE: " . substr($sourceDir, 40) . ":\n";
 		$files = new DirectoryIterator($sourceDir);
 		/** @var DirectoryIterator $file */
 		foreach ($files as $file)
@@ -256,10 +256,10 @@ class PackageInstaller extends LibraryInstaller
 				$targetPath = $this->getMappedPath($file->getPathname(), $mapping);
 				if (!$targetPath)
 				{
-					//echo "- skip: " . substr($file->getPathname(), 40) . "\n";
+					echo "- skip: " . substr($file->getPathname(), 40) . "\n";
 					continue;
 				}
-				//echo "- delete: " . substr($targetPath, 40) . "\n";
+				echo "- delete: " . substr($targetPath, 40) . "\n";
 				unlink($targetPath);
 			}
 		}
